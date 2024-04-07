@@ -1,27 +1,46 @@
 package com.aulasnelioalves.curso.entities;
 
-public class Product {
-	
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
+@Entity
+@Table(name = "tb_product")
+public class Product implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String description;
 	private Double price;
 	private String imgUrl;
-	
-	private Category category;
-	
+
+	@Transient
+	private Set<Category> categories = new HashSet<>();
+
 	public Product() {
-		
+
 	}
 
-	public Product(Long id, String name, String description, Double price, String imgUrl, Category category) {
+	public Product(Long id, String name, String description, Double price, String imgUrl) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.imgUrl = imgUrl;
-		this.category = category;
+
 	}
 
 	public Long getId() {
@@ -64,22 +83,31 @@ public class Product {
 		this.imgUrl = imgUrl;
 	}
 
-	public Category getCategory() {
-		return category;
+	public Set<Category> getCategories() {
+		return categories;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Product other = (Product) obj;
+		return Objects.equals(id, other.id);
 	}
 
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price
-				+ ", imgUrl=" + imgUrl + ", category=" + category + "]";
+				+ ", imgUrl=" + imgUrl;
 	}
-	
-	
-	
-	
 
 }
