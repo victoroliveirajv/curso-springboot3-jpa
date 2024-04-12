@@ -2,23 +2,17 @@ package com.aulasnelioalves.curso.config;
 
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.Date;
 
+import com.aulasnelioalves.curso.entities.*;
+import com.aulasnelioalves.curso.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import com.aulasnelioalves.curso.entities.Category;
-import com.aulasnelioalves.curso.entities.Order;
-import com.aulasnelioalves.curso.entities.OrderItem;
-import com.aulasnelioalves.curso.entities.Product;
-import com.aulasnelioalves.curso.entities.User;
 import com.aulasnelioalves.curso.entities.enums.OrderStatus;
-import com.aulasnelioalves.curso.repositories.CategoryRepository;
-import com.aulasnelioalves.curso.repositories.OrderItemRepository;
-import com.aulasnelioalves.curso.repositories.OrderRepository;
-import com.aulasnelioalves.curso.repositories.ProductRepository;
-import com.aulasnelioalves.curso.repositories.UserRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 @Configuration
 @Profile("test")
@@ -38,6 +32,9 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private OrderItemRepository orderItemRepository;
+
+	@Autowired
+	private PaymentRepository paymentRepository;
 	
 
 	@Override
@@ -87,6 +84,11 @@ public class TestConfig implements CommandLineRunner {
 		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+
+		Payment pay1 = new Payment(null, Instant.parse("2024-06-20T21:53:07Z"), o1);
+		o1.setPayment(pay1);
+		orderRepository.save(o1);
+
 		
 	
 	}
