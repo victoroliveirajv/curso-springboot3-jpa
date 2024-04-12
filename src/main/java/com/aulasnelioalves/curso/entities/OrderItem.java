@@ -7,6 +7,7 @@ import com.aulasnelioalves.curso.entities.pk.OrderItemPK;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Entity
@@ -65,6 +66,11 @@ public class OrderItem implements Serializable{
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+
+	public Double getSubTotal(){
+		return quantity * price;
 	}
 
 
