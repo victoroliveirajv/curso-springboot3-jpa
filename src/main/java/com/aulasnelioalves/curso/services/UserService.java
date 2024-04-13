@@ -54,12 +54,9 @@ public class UserService {
 			updateDate(entity, obj);
 			return repository.save(entity);
 
-		}catch (EntityNotFoundException e){
+		}catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException(id);
-		}catch (RuntimeException e){
-			e.printStackTrace();
 		}
-
 	}
 
 	private void updateDate(User entity, User obj){
