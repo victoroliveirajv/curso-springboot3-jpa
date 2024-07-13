@@ -12,21 +12,9 @@ public class CursoApplication {
 		SpringApplication.run(CursoApplication.class, args);
 		
 		Scanner sc = new Scanner(System.in);
-		
-		
 
-		
-		
-		
-		
 
-		
-		
-		
-		
-		
-		
-		
+
 		sc.close();
 	}
 

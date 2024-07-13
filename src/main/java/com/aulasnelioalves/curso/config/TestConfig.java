@@ -2,7 +2,6 @@ package com.aulasnelioalves.curso.config;
 
 import java.time.Instant;
 import java.util.Arrays;
-import java.util.Date;
 
 import com.aulasnelioalves.curso.entities.*;
 import com.aulasnelioalves.curso.repositories.*;
@@ -12,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.aulasnelioalves.curso.entities.enums.OrderStatus;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 @Configuration
 @Profile("test")
